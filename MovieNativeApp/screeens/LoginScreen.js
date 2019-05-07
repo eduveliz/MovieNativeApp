@@ -31,7 +31,6 @@ export default class LoginScreen extends React.Component {
         }
     };
 
-
     registerForm = () => {
         this.props.navigation.navigate('Register');
     };
@@ -52,6 +51,7 @@ export default class LoginScreen extends React.Component {
                             <Label>Password</Label>
                             <Input
                                 value={this.state.password}
+                                secureTextEntry={true}
                                 onChangeText={this.changeValues("password")}
                             />
                         </Item>
