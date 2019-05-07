@@ -1,12 +1,12 @@
 import {createStore} from "redux";
-import {createDocument} from "./firebase";
+import {createDocument, deleteDocument} from "./firebase";
 import firebase from "@firebase/app";
 
 const reducer = (state, action) => {
     if (action.type === "ADD_NEW_ADMIN") {
-        return (
-            createDocument("admins", action.admin)
-        )
+        return createDocument("admins", action.admin)
+    } else if (action.type === "DELETE_ADMIN") {
+        return deleteDocument("admins", action.adminId)
     }
     return state
 };

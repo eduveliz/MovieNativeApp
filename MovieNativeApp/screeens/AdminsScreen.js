@@ -20,7 +20,7 @@ export default class AdminsScreen extends React.Component {
 
                     this.state.admins.map((admin) => {
                         return <AdminCard
-                            name={admin.name} email={admin.email}
+                            admin={admin}
                         />
                     })
                 }
