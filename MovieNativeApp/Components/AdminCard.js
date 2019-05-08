@@ -6,7 +6,7 @@ import AdminEditModal from "./AdminEditModal";
 export default class AdminCard extends Component {
 
     state = {
-        isVisible: false
+        isVisible: false,
     };
 
     deleteAdmin = (adminId) => {
@@ -43,6 +43,7 @@ export default class AdminCard extends Component {
                     }
                 />
                 <AdminEditModal
+                    setModalVisible={this.setModalVisible}
                     isVisible={this.state.isVisible}
                     admin={this.props.admin}
                 />

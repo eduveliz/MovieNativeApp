@@ -1,15 +1,21 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import AdminCard from "../Components/AdminCard";
-import store from "../store"
+import {fetchCollection} from "../firebase";
 
 export default class AdminsScreen extends React.Component {
+    state = {
+        admins: []
+    };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            admins: store.getState().currentAdmins
-        };
+    componentDidMount() {
+        this.fetchAdmins();
+    }
+
+    fetchAdmins = () => {
+        fetchCollection("admins", (admins) => {
+            this.setState({admins: admins})
+        })
     };
 
     render() {

@@ -1,29 +1,27 @@
 import React, {Component} from 'react';
 import {Modal, Text, View} from 'react-native';
 import {Button, Form, Input, Item, Label} from "native-base";
-import store from "../store";
+import firebase from "@firebase/app";
 
 export default class AdminEditModal extends Component {
 
     state = {
         email: this.props.admin.email,
         password: this.props.admin.password,
-        name: this.props.admin.name
+        name: this.props.admin.name,
+        admin: this.props.admin,
+        isVisible: this.props.isVisible
     };
 
-    updateAdmin = (admin) => {
-        store.dispatch({
-            type: "UPDATE_ADMIN",
-            admin
-        })
-    };
-
-    adminToData = () => {
-        return {
-            email: this.state.email,
-            password: this.state.password,
-            name: this.state.name,
-        }
+    updateAdmin = () => {
+        firebase.firestore()
+            .collection("admins")
+            .doc(this.state.admin.id)
+            .set({
+                email: this.state.email,
+                name: this.state.name,
+                password: this.state.password
+            });
     };
 
     changeValues = key => val => {
@@ -60,9 +58,8 @@ export default class AdminEditModal extends Component {
                                     onChangeText={this.changeValues("name")}
                                 />
                             </Item>
-
                             <View style={{padding: 10}}>
-                                <Button full warning onPress={() => this.updateAdmin(this.adminToData())}>
+                                <Button full warning onPress={() => this.updateAdmin()}>
                                     <Text>Update</Text>
                                 </Button>
                             </View>
