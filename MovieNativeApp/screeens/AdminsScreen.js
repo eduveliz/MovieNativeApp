@@ -12,7 +12,6 @@ export default class AdminsScreen extends React.Component {
         };
     };
 
-
     render() {
         return (
             <View style={{flex: 1}}>

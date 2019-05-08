@@ -66,7 +66,6 @@ export default class RegisterScreen extends React.Component {
                                 onChangeText={this.changeValues("name")}
                             />
                         </Item>
-
                         <View style={{padding: 10}}>
                             <Button full warning onPress={() => this.addNewAdmin(this.adminToData())}>
                                 <Text>REGISTER</Text>

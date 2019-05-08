@@ -2,6 +2,7 @@ import React from 'react';
 import {AsyncStorage, View} from 'react-native';
 import {Button, Container, Content, Form, Input, Item, Label, Text} from 'native-base';
 import User from "../User";
+import {fetchCollection} from "../firebase";
 
 
 export default class LoginScreen extends React.Component {
@@ -13,6 +14,15 @@ export default class LoginScreen extends React.Component {
     state = {
         email: "",
         password: "",
+        users: []
+    };
+
+    componentWillMount() {
+        this.fetchUsers();
+    }
+
+    fetchUsers = () => {
+        fetchCollection("admins", (data) => this.setState({users: data}))
     };
 
     changeValues = key => val => {
@@ -20,14 +30,16 @@ export default class LoginScreen extends React.Component {
     };
 
     submitForm = async () => {
-        if (this.state.email.length < 8) {
-            alert("bad email")
-        } else if (this.state.password.length < 3) {
-            alert("bad password")
-        } else {
-            await AsyncStorage.setItem("userEmail", this.state.email);
+        const validation = this.state.users.find((admin) => (admin.email === this.state.email && admin.password === this.state.password));
+        if (validation) {
+            await AsyncStorage.setItem("userId", validation.id);
+            AsyncStorage.setItem("userEmail", this.state.email);
+            AsyncStorage.setItem("userName", this.state.name);
             User.email = this.state.email;
+            User.id = validation.id;
             this.props.navigation.navigate('App');
+        } else {
+            alert("bad email")
         }
     };
 

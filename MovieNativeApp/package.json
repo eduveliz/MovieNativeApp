@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@firebase/app": "latest",
     "@firebase/firestore": "^1.3.0",
     "firebase": "^6.0.0",
     "native-base": "^2.12.1",
@@ -14,8 +15,8 @@
     "react-native": "0.59.5",
     "react-native-gesture-handler": "^1.2.1",
     "react-navigation": "^3.9.1",
-    "redux": "^4.0.1",
-    "@firebase/app": "latest"
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
